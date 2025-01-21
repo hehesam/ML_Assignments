@@ -47,7 +47,13 @@ This project demonstrates the implementation of a supervised learning algorithm 
 | Neural Network   | 58.16%         |
 
 ## **Repository Structure**
-
+```
+|-- part2.ipynb             # Contains further KRLS implementation details
+|-- Other_models.ipynb      # Implementation and results of Random Forest, SVM, and Neural Network
+|-- Project Report.pdf      # Detailed project report
+|-- trainingx.csv           # Training dataset features
+|-- trainingy.csv           # Training dataset labels
+```
 
 ## **Prerequisites**
 - Python 3.8+
@@ -58,3 +64,25 @@ This project demonstrates the implementation of a supervised learning algorithm 
 2. Install required libraries using:
    ```bash
    pip install -r requirements.txt
+   ```
+3. Run the notebooks in the following order:
+   - `part2.ipynb` for KRLS implementation.
+   - `Other_models.ipynb` for Random Forest, SVM, and Neural Network.
+
+## **Lessons Learned**
+- The choice of kernel and regularization parameters significantly impacts KRLS performance.
+- Handling class imbalance is crucial in multiclass classification tasks.
+- Cross-validation is essential for robust hyperparameter tuning.
+
+## **Future Work**
+- Explore other kernels for KRLS (e.g., polynomial, Laplacian).
+- Implement ensemble methods to combine KRLS with other models.
+- Investigate advanced techniques for handling class imbalance (e.g., SMOTE).
+
+## **References**
+- [Scikit-learn Documentation](https://scikit-learn.org/)
+- Project Report: `Project Report.pdf`
+
+---
+For further questions or contributions, feel free to contact the contributors.
+
