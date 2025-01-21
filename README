@@ -1,4 +1,4 @@
-# **Supervised Learning with KRLS and Gaussian Kernel**
+# Supervised Learning with KRLS and Gaussian Kernel**
 
 ## **Project Overview**
 This project demonstrates the implementation of a supervised learning algorithm using Kernel Regularized Least Squares (KRLS) with a Gaussian kernel. The objective is to perform multiclass classification using the provided dataset while optimizing hyperparameters via Q-fold cross-validation.
