@@ -1,0 +1,40 @@
+1. Initialization:
+    Xtr, Ytr = MixGuassian()
+    Xte, Yte = MixGuassian()
+    reg_par = [] //regularization parameter (value of lambda)
+    maxiter // maximum number of iterations to run gradient descent 
+    optimal_gd_learning_rate(Xtr, reg_par) // Estimates the Gamma parameter: the optimal learning rate in in gradient descent
+
+2. Logistic Function:
+    Train_logreg_SGD(Xtr, Ytr, reg_par, maxiter=100)
+    epsilon = 1e-6 // early stopping criterion
+    n, D = np.shape(Xtr)  // number of samples n and features data
+    w = np.zero(D,1) //initialize weights zero
+
+    // 3 SGD loop:
+    for i = 0 to maxiter-1:
+        //updating learning rate
+        gamma = 1 / np.sqrt(i+1)
+    // Random sample selection 
+    # Choose a random sample index
+    sample_idx = np.random.randint(0, n)
+    x_sample = Xtr[sample_idx].reshape(1,-1) //shape 1xD
+    y_sample = Ytr[sample_dx] // already sahpe 1xD
+
+    # compute the prediction
+    z = np.dot(x_sample, w) // linear combination for sample 
+    prediction = 1/(1+np.exp(-z)) # apply sigmoid function
+
+    # calculate gradient
+    gradient = (prediction - y_sample)*x_sample.T + reg_par*w
+
+    # update weights
+    w = w - gamma*gradient 
+
+    # Computing loss(optional)
+    # store loss
+    training_losses[i] = loss
+
+    # check for early stopping
+
+    

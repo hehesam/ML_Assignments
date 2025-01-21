@@ -1,0 +1,36 @@
+1. Initialization
+    Xtr,Ytr = MixGuassian()
+    Xte,Yte = MixGuassian()
+    RLSTrain() // computing weight
+    RLSTest() // computing predictions
+    calc_error() // lost function(Euclidian)
+    lambda_list = []
+
+2. QFCV_RLS(Xtr,Ytr, lambda_list, Q_folds):
+    P = [(Xtr,Ytr)/Q_folds] // dividing training set into Q non-overlaping folds
+    nq = len(Q_folds)
+    nlam = len(lambda_list)
+    val_errors = np.zeros((nq,nlam)) // we want to compute 1 error in every fold for each lambda
+    tr_errors = np.zeros((nq,nlam))
+
+    for qidx in range(nq):
+        Xval,Yval = P[qidx] // selecting one fold for validation
+        X_tr,Y_tr = P[nq-qidx] // rest of data for training
+
+        for lamidx in range(nlam):
+            curr_lambda = lambda_list[lamidx]
+            curr_w = RLSTrain(X_tr, Y_tr, curr_lambda)
+            ypred_val = RLSTest(curr_w, Xval)
+            ypred_tr = RLSTest(curr_w, Xtr)
+
+            curr_val_error = calc_error(ypred_val, Yval)
+            val_errors[qidx][lamidx] = curr_val_error
+
+            curr_tr_error = calc_error(ypred_tr, Y_tr)
+            tr_errors[qidx][lamidx] = curr_tr_error
+    
+    avg_val_error = np.zeros(1,nlam)
+
+    for lamidx in range(nlam):
+        curr_avg = val_errors[:,]
+             

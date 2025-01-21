@@ -1,0 +1,66 @@
+GPT implementation: 
+1. Initialization:
+    guassian_kernel() // AKA RBF
+    Xtr, Ytr = MixGuassian()
+2. defining the KRLS:
+    KRLS(Xtr, Ytr, kernel_func, reg_param):
+        n = X.shape[0] # number of samples
+        K = np.zeors(n,n) # computing the kernel identity_matrix
+        for i in range(n)
+            for j in range(n):
+                k[i,j] = kernel_func(Xtr[i], Xtr[j])
+
+        # add a regularization term 
+        K_reg = k + reg_param * np.eye(n)
+
+        # solve for weights
+        w = np.linalg.solve(K_reg, Ytr)
+
+        return w,K
+    
+Hands on: 
+1. Initialization:
+    Kernel_matrix(X1, X2, kenrel_type, param)
+2. KRLS_train(x,y,reg_par, kernel_type, kernel_par):
+    n = x.shape[0]
+    k = kernel_matrix(x,x, kernel_type, kernel_par)
+    K_reg = k + n*reg_par*np.eye(n)
+    w = np.linalg.solve(K_reg, y)
+    return w
+3. KRLS_predict(x_ts, x_tr, w,  kernel_type, kernel_par):
+    K_ts = kernel_matrix(x_ts, x_tr, kernel_type, kernel_par)
+    return np.dot(K_ts, w)
+
+
+
+1. Initialization:
+    kernel_matrix(X1, X2, kernel_type, kernel_par)
+    Xtr, Ytr = MixGuassian()
+    Xte, Yte = MixGuassian()
+
+2. KRLS_train(Xtr, Ytr,reg_par, kernel_type, kernel_par):
+    n = Xtr.shape[0] # size of input
+    k = kernel_matrix(Xtr, Xtr, kernel_type, kernel_par)
+    K_reg = k + n* reg_par * np.eye(n)
+    w = np.linalg.solve(K_reg, Ytr)
+    return w
+3. KRLS_predict(Xte, Xtr, w, kernel_type, kernel_par):
+    K_ts = kernel_matrix(Xte, Xtr, kernel_type, kernel_par)
+    ypredict = np.dot(K_ts, w)
+
+1. Initialization
+    kernel_metrix(X1, X2, reg_par, kernel_type, kernel_par)
+    Xtr, Ytr
+2.KRLS_train(Xtr, Ytr, reg_par, kernel_type, kernel_par)
+    n = Xtr.shape[0]
+    k = kernel_matrix(Xtr, Xtr, kernel_type, kernel_par)
+    K_reg = (k + n*reg_par*.np.eye(n))
+    w = solve(Ytr, K_reg)
+    return w 
+3. KRLS_predict(Xte, Xtr, w, kernel_type, kernel_par):
+    K = kernel_matrix(Xte, Xtr, kernel_type, kernel_par)
+    ypredict = np.dot(k,w)
+    return ypredict
+
+
+

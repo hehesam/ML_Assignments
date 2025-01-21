@@ -1,0 +1,36 @@
+OMP(Xtr, Ytr, T):
+    1. Initialization
+    n,D = np.shape(Xtr)
+    I = 0 # indexes
+    w = np.zeroes(D) # coefficient vector
+    r = Ytr # residual
+
+    2. we select and add the best vaiable T time 
+    For i in range(T):
+        best_coeff = -1
+        varaible = empty
+
+        3. calculate the coefficient (maximum correlation)
+
+        for j in range(d):
+            temp_coeff = (np.dot(r.T,Xtr[:,j]))**2 / Xtr[:, j]**2
+            if temp_coeff > best_coeff:
+                best_coeff = temp_coeff
+                variable = j
+        
+        4. Updating the parameters
+        I.append(variable)
+        Xvar = Xtr[:, variable]
+        A = np.dot(xvar.T,xvar)
+        B = np.dot(xvar.T,Ytr)
+        w = B/A 
+
+        5. updating the residual
+
+        r = Ytr - np.dot(w.T,Xtr)
+    return r,I,w
+
+    for Qfold cross validation of OMP, we act similar to the Qfold cross validation KNN except instead of k,
+    we have iter, which is a number of iterations that we calculate the residual:
+    1. we devide the dataset into Q non-overlapping folds,
+    2. for each fold, 

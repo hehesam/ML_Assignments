@@ -1,0 +1,19 @@
+1. Initialization
+    Xtr,Ytr = MixGuassian()
+    Xte,Yte = MixGuassian()
+    k_list = [1,2,3,...,10]
+    KNN() // KNN function 
+    calc_error() // Loss function(Euclidian)
+2. Cross validation (iterating through all k finding thelowest error per k and assing it as best k)
+
+    erro_list = []
+    for curr_k in k_list()
+        Y_pred = KNN(Xtr,Ytr,Xte, curr_k)
+        curr_error = calc_error(Y_pred,Ytr)
+        erro_list.append(curr_error)
+    sorted_error_indices = argsort(erro_list)
+    best_k = k_list[sorted_error_indices[0]]
+    
+3. Training the model with the best k_list
+    Ypred = KNN(Xtr,Ytr, Xte, best_k)
+    te_error = calc_error(Ypred, Yte)

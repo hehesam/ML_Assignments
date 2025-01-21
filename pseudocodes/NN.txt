@@ -1,0 +1,12 @@
+1. Initialization:
+    S = training set S = {(x1,y1),(x2,y2),...,(xn,yn)}
+    x* = query new point
+    distnaces = []
+2. computing the distance:
+    for i in n:
+        distances[i] = ||x*-xi|| (Euclidian distance or other metrics)
+3. finding the nearest neighbor:
+    sorted_inddices = arg_sort(distances)
+4. assing the nearest neighbor to x*
+    j = sorted_indices[0]
+    y* = y[j]

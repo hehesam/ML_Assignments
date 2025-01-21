@@ -1,0 +1,34 @@
+1. Initialization:
+    Xtr, Ytr = MixGuassian()
+    Xte, Yte = MixGuassian()
+    reg_par = [] //regularization parameter (value of lambda)
+    maxiter // maximum number of iterations to run gradient descent 
+    optimal_gd_learning_rate(Xtr, reg_par) // Estimates the Gamma parameter: the optimal learning rate in in gradient descent
+
+2. Logisticfunction:
+    Train_logreg_gd(Xtr, Ytr, reg_par, maxiter=100)
+    epsilon = 1e-6 //Epsilon is criterion for early stopping
+    n, D = np.shape(Xtr) // size of input in training set
+    w = np.zeros((D,1)) // initializing vector weight 
+    gamma = optimal_gd_learning_rate(Xtr, reg_par)
+
+    while j<maxiter and abs(loss-loss_old) >= epsilon:
+        loss_old = loss
+
+        z = np.dot(Xtr, w) //compute prediction using current weights, linear combination
+        prediction = 1/(1+np.exp(-z)) // apply sigmoid function
+
+        // calculate the gradient
+        gradient = (1/n) * np.dot(Xtr.T, (prediction-Ytr)) + reg_par*w
+        
+        // updating weights
+        w = w - gamma*gradient
+        
+        // compute loss
+        loss = -[Ytr[i].log(y[i]) + (1-Ytr[i]).log(1-y[i])]
+
+        // store loss
+        training_losses[j] = loss[0, 0]
+
+        j ++
+

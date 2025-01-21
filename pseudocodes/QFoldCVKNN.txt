@@ -1,0 +1,31 @@
+1. Initialization:
+    Xtr, Ytr = MixGuassian()
+    Xte, Yte = MixGuassian()
+    k_list = [1,2,3,....,10]
+    calc_error() // loss function(Euclidian)
+    KNN() // KNN function
+
+2. QFoldCrossValidationKNN(Xtr,Ytr, k_list, Qfold):
+    P = [(Xtr,Ytr)//Qfold] // we divid out training set into Q non-overlaping folds
+    nk = len(k_list)
+    nQ = len(Qfold)
+    val_erros = np.zeros((nQ,nk)) // we want to compute 1 error in each fold, for each k
+
+    for qidx in range(nQ):
+        Xval,Yval = P(qidx) // in each iteration we select one fold to be validation
+        X_tr,Y_tr = P(nQ-qidx) // the rest of folds are test
+
+        for kidx in range(nk):
+            ypred = KNN(X_tr, Y_tr, Xval, k_list[kidx])
+            curr_error = calc_error(ypred,Yval)
+            val_errors[qidx,kidx] = curr_error
+    
+    avg_errors = np.zeros(1,nk)
+
+    for kidx in range(nk):
+        curr_k_avg = avg(val_errors[:,kidx]) // averaging the error for each k from all the folds
+        avg_errors.append(curr_k_avg, kidx)
+    
+    sorted_error_indices = arg_sort(avg_errors)
+    best_k_idx = sorted_error_indices[0]
+    return k_list[best_k_idx]

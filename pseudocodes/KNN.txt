@@ -1,0 +1,21 @@
+1. Initialization
+    Xtr, Ytr = MixGuassian() // generating sample training
+    Xte, Yte = MixGuassian()
+    k // number of neighbors 
+
+2. calculating the k nearest neighbors for each point
+    KNN(Xtr, Ytr, Xte, k):
+        Y_pred = np.zeros(len(Xte))
+        dist = Alldistaces(Xte,Xtr)
+
+        for idx in range(len(Xte)): // iterating through each test point, finding 
+        its KNN, setting average value of KNN for that point
+
+            distances = dist[idx]
+            sorted_indexs = argsort(distances)
+            knn_indexs = sorted_indexs[:k]
+            knn_values = Ytr(knn_indexs)
+            Y_pred[idx] = np.mean(knn_values)
+            // for classification :
+            Y_pred[idx] = np.sign(np.mean(knn_values))
+        return Y_pred

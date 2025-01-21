@@ -1,0 +1,70 @@
+1. Initialization:
+    kernel_matrix(X1, X2, kernel_type, kernel_par)
+    Xtr, Ytr = MixGuassian()
+    Xte, Yte = MixGuassian()
+    krls_train(X,Y,reg_par, kernel_type, kernel_par)
+    krls_predict(Xte, Xtr, w, kernel_type, kernel_par)
+
+2. krls_kfold_valerr(Xtr, Ytr, Q, reg_par, kernel_type, kernel_par):
+    P = [(Xtr,Ytr)/Q] # deviding training set into q non-overlaping folds
+    n_tot = Xtr.shape[0]
+    tr_errs, val_errs = [], []
+
+    for qidx in Q:
+        Xval, Yval = P[aidx]
+        X_tr, Y_tr = P[rest]
+
+        w_krls = krls_train(X_tr, Y_tr,reg_par, kernel_type, kernel_par)
+        ypred = krls_predict(Xval, X_tr, w_krls, kernel_type, kernel_par)
+        val_erorrs[qidx] = calc_error(ypred, Yval)
+    return val_erros
+
+3. krls_kfoldcv(Xtr, Ytr, Q, reg_par_list, kernel_type, kernel_par_list):
+    erros = np.zeors(len(reg_par_list), len(kernel_par_list))
+    for reg_idx in range(len(reg_par_list)):
+        for ker_idx in range(len(kernel_par_list))
+            curr_reg_par
+            curr_kernel_par
+            val_errors = krls_kfold_valerr(Xtr, Ytr, Q, curr_reg_par, kernel_type, curr_kernel_par)
+            errors[reg_idx][ker_idx] = mean(val_errors)
+
+    using arg_sort we find the best reg_par and kernel_par.
+    after that we use the training set to evaluate the performance of the model
+
+
+
+Bahaar's KRLS QF CV
+
+# KRLS using parameter tuning
+we have Xtr, Ytr, Xval, Yval, Xte, Yte,
+also k_par_list, reg_par_list, k_type
+
+best_regpar = none
+best_kpar = none 
+best_error = none
+
+for regpar in reg_par_list:
+    for kpar in k_par_list:
+        w = krls_train(Xtr, Ytr, regpar, kpar, ktype)
+        ypred = krls_test(Xtr, Xval, w, kpar, ktype)
+        curr_erro = calc_error(ypred,Yval)
+
+        if curr_error< best_error:
+            best_error = curr_error
+            best_regpar = regpar
+            best_kpar = kpar
+        
+# now we have the best hyperparameters
+# train the model one last time with the best hyperparameters
+w = krls_train(Xtr, Ytr, best_regpar, best_kpar, k_type)
+ypred = krls_predict(Xtr, Xte, w, best_kpar, k_type)
+calc_error(ypred, Ytest)
+
+# KRLS with K-fold
+its as same as before but instead of training and testing the model in the main function,
+we have
+
+for reg_par in reg_par_list:
+    for k_par in k_par_list:
+        tr_error, val_error = CalcVal_error(Xtr, Ytr, num_folds, reg_par, k_par, k_type)
+        errors[reg_par][k_par] = np.mean(val_error)
